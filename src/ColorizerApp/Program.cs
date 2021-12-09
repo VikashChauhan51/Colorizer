@@ -29,3 +29,19 @@ WriteLine("Hello,first {0} second {1} third {3} forth {2} fifth {4} sixth {7} se
             new Parm { Value = "10", Color = ConsoleColor.Cyan },
             new Parm { Value = "11", Color = ConsoleColor.Green });
 
+string dream = "a dream of {0} and {1} and {2} and {3} and {4} and {5} and {6} and {7} and {8} and {9}...";
+string[] fruits = new string[]
+{
+    "bananas",
+    "strawberries",
+    "mangoes",
+    "pineapples",
+    "cherries",
+    "oranges",
+    "apples",
+    "peaches",
+    "plums",
+    "melons"
+};
+
+WriteLine(dream,ConsoleColor.Gray,ConsoleColor.Yellow, fruits);

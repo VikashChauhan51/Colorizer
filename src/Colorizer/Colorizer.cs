@@ -164,15 +164,7 @@ public static class Colorizer
         _ = string.Format(format, args);
 
         // parms pattern collections
-        var patterns = new HashSet<Pattern>();
-        for (int pos = 0; pos < args.Length; pos++)
-        {
-            var pattern = "{" + pos + "}";
-            var patternIndex = format.IndexOf(pattern);
-            if (patternIndex == -1)
-                throw new FormatException(nameof(format));
-            patterns.Add(new Pattern { ParmIndex = pos, Format = pattern, FormatIndex = patternIndex });
-        }
+        HashSet<Pattern> patterns = GetPatterns(format, args.Length).ToHashSet();
         //write text
         for (int index = 0; index < format.Length;)
         {
@@ -189,7 +181,63 @@ public static class Colorizer
                 index++;
             }
         }
-       
+
+    }
+
+    /// <summary>
+    ///  Print colorizer text based on provided string format ,format color and parameters.
+    /// </summary>
+    /// <para>
+    /// <exception cref="System.ArgumentNullException">format or args is null.</exception>
+    /// <exception cref="System.FormatException">format is invalid. -or- The index of a format item is less than zero, or greater than or equal to the length of the args array.</exception>
+    /// </para>
+    /// <param name="format">A composite format <see cref="string"/>.</param>
+    /// <param name="formatColor"><see cref="ConsoleColor"/> type color value.</param>
+    /// <param name="argColor"><see cref="ConsoleColor"/> type color value.</param>
+    /// <param name="args">An <see cref="string"/> array that contains zero or more objects to format.</param>
+
+    public static void WriteLine(string format, ConsoleColor formatColor, ConsoleColor argColor, params string[] args)
+    {
+        Write(format, formatColor, argColor,args);
+        Console.WriteLine(string.Empty);
+    }
+    /// <summary>
+    ///  Print colorizer text based on provided string format ,format color and parameters.
+    /// </summary>
+    /// <para>
+    /// <exception cref="System.ArgumentNullException">format or args is null.</exception>
+    /// <exception cref="System.FormatException">format is invalid. -or- The index of a format item is less than zero, or greater than or equal to the length of the args array.</exception>
+    /// </para>
+    /// <param name="format">A composite format <see cref="string"/>.</param>
+    /// <param name="formatColor"><see cref="ConsoleColor"/> type color value.</param>
+    /// <param name="argColor"><see cref="ConsoleColor"/> type color value.</param>
+    /// <param name="args">An <see cref="string"/> array that contains zero or more objects to format.</param>
+ 
+    public static void Write(string format, ConsoleColor formatColor, ConsoleColor argColor, params string[] args)
+    {
+        if (!HasFormat(format))
+            throw new FormatException(nameof(format));
+ 
+        //ensure format is vallid
+        _ = string.Format(format, args);
+
+        // parms pattern collections
+        HashSet<Pattern> patterns = GetPatterns(format, args.Length).ToHashSet();
+        //write text
+        for (int index = 0; index < format.Length;)
+        {
+            var pattern = patterns.SingleOrDefault(x => x.FormatIndex == index);
+            if (pattern != null)
+            {
+                Write(args[pattern.ParmIndex]?.ToString() ?? string.Empty, argColor);
+                index += pattern.Format.Length;
+            }
+            else
+            {
+                Write(format[index], formatColor);
+                index++;
+            }
+        }
     }
     /// <summary>
     ///  Check provided format string.
@@ -210,6 +258,26 @@ public static class Colorizer
     /// <returns><see cref="bool"/></returns>
     private static bool HasArgs(Parm[] args) => args?.Length > 0;
 
+    /// <summary>
+    /// Get patterns based on number of args provided.
+    /// </summary>
+    /// <param name="format"></param>
+    /// <param name="argsCount"></param>
+    /// <returns></returns>
+    /// <exception cref="FormatException"></exception>
+    private static IEnumerable<Pattern> GetPatterns(string format, int argsCount)
+    {
+
+        for (int pos = 0; pos < argsCount; pos++)
+        {
+            var pattern = "{" + pos + "}";
+            var patternIndex = format.IndexOf(pattern);
+            if (patternIndex == -1)
+                throw new FormatException(nameof(format));
+            yield return new Pattern { ParmIndex = pos, Format = pattern, FormatIndex = patternIndex };
+        }
+     
+    }
 
 }
 
