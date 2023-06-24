@@ -1,5 +1,6 @@
 # Colorizer
-Colorize your  Console output with this simple to use and extensible library
+Colorize your  Console output with this simple to use and extensible library.
+![image](https://github.com/VikashChauhan51/Colorizer/assets/14816038/f6c909f2-4060-43d7-b4e8-040158a52b7d)
 
 
 ## Quick Start Example
