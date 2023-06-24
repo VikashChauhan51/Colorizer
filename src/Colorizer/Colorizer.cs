@@ -21,9 +21,9 @@ internal sealed class Pattern
 }
 
 /// <summary>
-/// Colorize your Console output with this simple to use and extensible library.
+/// Colorize Console output with this simple to use and extensible library.
 /// </summary>
-public static class Colorizer
+public static class ConsoleColorizer
 {
 
     /// <summary>
@@ -239,6 +239,63 @@ public static class Colorizer
             }
         }
     }
+
+
+    /// <summary>
+    ///  Print colorizer <see cref="Parm"/> text.
+    /// </summary>
+    /// <param name="args">An array of <see cref="Parm"/>. </param>
+    /// <exception cref="System.ArgumentNullException">format or args is null.</exception>
+    public static void WriteLine(params Parm[] args)
+    {
+        Write(args);
+        Console.WriteLine(string.Empty);
+    }
+
+    /// <summary>
+    ///  Print colorizer <see cref="Parm"/> text.
+    /// </summary>
+    /// <param name="args">An array of <see cref="Parm"/>. </param>
+    /// <exception cref="System.ArgumentNullException">format or args is null.</exception>
+    public static void Write(params Parm[] args)
+    {
+        if (!HasArgs(args))
+            throw new ArgumentNullException(nameof(args));
+
+        foreach (var parm in args)
+            Write(parm.Value, parm.Color);
+
+    }
+
+    /// <summary>
+    ///  Print colorizer <see cref="Parm"/> text with a space between each <see cref="Parm"/> values.
+    /// </summary>
+    /// <param name="args">An array of <see cref="Parm"/>. </param>
+    /// <exception cref="System.ArgumentNullException">format or args is null.</exception>
+    public static void WriteSpaceLine(params Parm[] args)
+    {
+        WriteSpace(args);
+        Console.WriteLine(string.Empty);
+    }
+
+    /// <summary>
+    ///  Print colorizer <see cref="Parm"/> text with a space between each <see cref="Parm"/> values.
+    /// </summary>
+    /// <param name="args">An array of <see cref="Parm"/>. </param>
+    /// <exception cref="System.ArgumentNullException">format or args is null.</exception>
+    public static void WriteSpace(params Parm[] args)
+    {
+        if (!HasArgs(args))
+            throw new ArgumentNullException(nameof(args));
+
+        foreach (var parm in args)
+        {
+            Write(parm.Value, parm.Color);
+            Write(" ", parm.Color);
+        }
+
+    }
+
     /// <summary>
     ///  Check provided format string.
     ///  <para>

@@ -1,9 +1,37 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <SignAssembly>True</SignAssembly>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Colorizer string format arguments.</Title>
+    <Description>Colorizer is a .NET library to colorize console window output with this simple to use and extensible library.</Description>
+    <PackageProjectUrl>https://github.com/VikashChauhan51/Colorizer</PackageProjectUrl>
+    <Authors>VikashChauhan51</Authors>
+    <Copyright>Copyright © VikashChauhan51, 2023</Copyright>
+    <RepositoryUrl>https://github.com/VikashChauhan51/Colorizer</RepositoryUrl>
+    <PackageTags>command-line;command-line-colorizer;command-pattern;colorizer;console;console-colorizer;console-output</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <AssemblyOriginatorKeyFile>..\Colorizer.snk</AssemblyOriginatorKeyFile>
+    <RepositoryType>git</RepositoryType>
+    <ProjectGuid>{72219BBE-A7AE-4D69-B255-CB75AE266995}</ProjectGuid>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  
 </Project>
