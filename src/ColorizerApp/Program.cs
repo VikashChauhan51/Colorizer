@@ -1,8 +1,7 @@
 ﻿using Colorizer;
-using static Colorizer.Colorizer;
 
 // print with sequntial parameters
-WriteLine("Hello,first {0} second {1} third {2} forth {3} fifth {4} sixth {5} seventh {6} eighth {7} nineth {8} tenth {9} rest {10} World!", ConsoleColor.Red,
+ConsoleColorizer.WriteLine("Hello,first {0} second {1} third {2} forth {3} fifth {4} sixth {5} seventh {6} eighth {7} nineth {8} tenth {9} rest {10} World!", ConsoleColor.White,
     new Parm { Value = "1", Color = ConsoleColor.Green },
     new Parm { Value = "2", Color = ConsoleColor.Yellow },
     new Parm { Value = "3", Color = ConsoleColor.Blue },
@@ -16,7 +15,7 @@ WriteLine("Hello,first {0} second {1} third {2} forth {3} fifth {4} sixth {5} se
     new Parm { Value = "11", Color = ConsoleColor.Green });
 
 // print with non sequntial parameters
-WriteLine("Hello,first {0} second {1} third {3} forth {2} fifth {4} sixth {7} seventh {6} eighth {5} nineth {8} tenth {9} rest {10} World!", ConsoleColor.Red,
+ConsoleColorizer.WriteLine("Hello,first {0} second {1} third {3} forth {2} fifth {4} sixth {7} seventh {6} eighth {5} nineth {8} tenth {9} rest {10} World!", ConsoleColor.Red,
             new Parm { Value = "1", Color = ConsoleColor.Green },
             new Parm { Value = "2", Color = ConsoleColor.Yellow },
             new Parm { Value = "3", Color = ConsoleColor.Blue },
@@ -44,4 +43,22 @@ string[] fruits = new string[]
     "melons"
 };
 
-WriteLine(dream,ConsoleColor.Gray,ConsoleColor.Yellow, fruits);
+ConsoleColorizer.WriteLine(dream,ConsoleColor.Gray,ConsoleColor.Yellow, fruits);
+
+var parms = new[]
+{
+            new Parm { Value = "bananas", Color = ConsoleColor.Green },
+            new Parm { Value = "strawberries", Color = ConsoleColor.Yellow },
+            new Parm { Value = "mangoes", Color = ConsoleColor.Blue },
+            new Parm { Value = "pineapples", Color = ConsoleColor.Magenta },
+            new Parm { Value = "cherries", Color = ConsoleColor.Cyan },
+            new Parm { Value = "oranges", Color = ConsoleColor.Gray },
+            new Parm { Value = "apples", Color = ConsoleColor.Green },
+            new Parm { Value = "peaches", Color = ConsoleColor.DarkYellow },
+            new Parm { Value = "plums", Color = ConsoleColor.White },
+            new Parm { Value = "melons", Color = ConsoleColor.Cyan },
+            new Parm { Value = "enjoy...", Color = ConsoleColor.Green }
+};
+
+ConsoleColorizer.WriteSpaceLine(parms);
+ConsoleColorizer.WriteLine(parms);
